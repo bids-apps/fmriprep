@@ -30,16 +30,16 @@
 # not for distribution within Docker hub.
 # For that purpose, the Dockerfile is found in build/Dockerfile.
 
-FROM oesteban/crn_nipype:freesurfer
+FROM poldracklab/neuroimaging-core:freesurfer-0.0.1
 
-RUN mkdir -p /opt/c3d && \
-    curl -sSL "https://2a353b13e8d2d9ac21ce543b7064482f771ce658.googledrive.com/host/0BxI12kyv2olZVFhUcGVpYWF3R3c/c3d.tar.gz" \
-    | tar -xzC /opt/c3d --strip-components 1
-ENV C3DPATH /opt/c3d
-ENV PATH $C3DPATH:$PATH
+RUN curl -sSLO https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh && \
+    /bin/bash Miniconda2-latest-Linux-x86_64.sh -b -p /usr/local/miniconda && \
+    rm Miniconda2-latest-Linux-x86_64.sh
+ENV PATH /usr/local/miniconda/bin:$PATH
 
-RUN rm -rf /usr/local/miniconda/lib/python*/site-packages/nipype* && \
-    pip install -e git+https://github.com/nipy/nipype.git@master#egg=nipype && \
+# Create conda environment, use nipype's conda-forge channel
+RUN conda config --add channels conda-forge && \
+    conda install -y numpy scipy lockfile matplotlib && \
     pip install fmriprep[all] && \
     python -c "from matplotlib import font_manager"
 
