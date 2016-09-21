@@ -3,7 +3,7 @@ general:
     - "~/outputs1"
     - "~/outputs2"
 machine:
-  env:
+  environment:
     GOOGLEDRIVE_URL: https://4b1e6e99423aa60e1a8d9c3986c79f4ca3862125.googledrive.com/host/0B2JWN60ZLkgkMEw4bW5VUUpSdFU
   services:
     - docker #don't use 1.10 - caching is broken
