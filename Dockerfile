@@ -39,11 +39,13 @@ ENV PATH /usr/local/miniconda/bin:$PATH
 
 # Create conda environment, use nipype's conda-forge channel
 RUN conda config --add channels conda-forge && \
-    conda install -y numpy scipy lockfile matplotlib && \
-    pip install fmriprep[all] && \
+    conda install -y numpy scipy matplotlib && \
+    pip install -e git+https://github.com/nipy/nipype.git@master#egg=nipype && \
     python -c "from matplotlib import font_manager"
 
 COPY run_fmriprep.sh /run_fmriprep
 COPY version /version
+
+RUN pip install fmriprep[all]
 
 ENTRYPOINT ["/run_fmriprep"]
