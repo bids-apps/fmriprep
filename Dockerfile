@@ -46,6 +46,6 @@ RUN conda config --add channels conda-forge && \
 COPY run_fmriprep.sh /run_fmriprep
 COPY version /version
 
-RUN pip install "fmriprep>=0.1.2a1"
+RUN pip install "fmriprep>=0.1.2a2"
 
 ENTRYPOINT ["/run_fmriprep"]
