@@ -41,6 +41,7 @@ ENV PATH /usr/local/miniconda/bin:$PATH
 RUN conda config --add channels conda-forge && \
     conda install -y numpy scipy matplotlib && \
     pip install -e git+https://github.com/nipy/nipype.git@master#egg=nipype && \
+    pip install -e git+https://github.com/incf/pybids.git@master#egg=pybids && \
     python -c "from matplotlib import font_manager"
 
 COPY run_fmriprep.sh /run_fmriprep
