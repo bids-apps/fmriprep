@@ -1,3 +1,3 @@
-FROM poldracklab/fmriprep:0.4.3
+FROM poldracklab/fmriprep:0.4.5
 COPY version /version
 
