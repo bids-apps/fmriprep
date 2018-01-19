@@ -1,3 +1,6 @@
-FROM poldracklab/fmriprep:0.4.5
-COPY version /version
+FROM alpine
 
+COPY version /version
+COPY run_fmriprep.sh /run_fmriprep.sh
+
+ENTRYPOINT ["/run_fmriprep.sh"]
